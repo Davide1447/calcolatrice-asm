@@ -14,8 +14,8 @@ start:
     lea rdx, [utente]
     call [scanf]
 
-    ; Controllo overflow: se l'utente ha inserito più di 10 caratteri
-    ; il byte all'offset 10 non sarà zero -> esci
+    ; controllo overflow: se l'utente ha inserito piÃ¹ di 10 caratteri
+    ; il byte all'offset 10 non sarÃ  zero allora esci
     lea rdx, [utente]
     cmp BYTE [rdx+0Ah], 0h
     jne quit
@@ -104,7 +104,7 @@ addizione:
     call [Sleep]
 
     add rsp, 40h
-    jmp quit                        ; FIX: evita fall-through in moltiplicazione
+    jmp quit                        ; jmp evita fall-through in moltiplicazione
 
 ; ---------------------------------------------
 moltiplicazione:
@@ -136,11 +136,11 @@ moltiplicazione:
     call [printf]
 
     add rsp, 40h
-    jmp quit                        ; FIX: evita fall-through in divisione
+    jmp quit                     
 
 ; ---------------------------------------------
 divisione:
-    sub rsp, 40h                    ; FIX: mancava shadow space
+    sub rsp, 40h                 
 
     lea rcx, [strdiv]
     call [printf]
@@ -181,7 +181,7 @@ divisione_zero:
 
 ; ---------------------------------------------
 sottrazione:
-    sub rsp, 40h                    ; FIX: mancava shadow space
+    sub rsp, 40h                   
 
     lea rcx, [sottrazi]
     call [printf]
@@ -202,7 +202,7 @@ sottrazione:
     sub rax, rdx
     mov [risultatosub], rax
 
-    lea rcx, [risultatop]           ; FIX: era xor rdx,rcx prima -> corrompeva rcx
+    lea rcx, [risultatop]           
     mov rdx, [risultatosub]
     call [printf]
 
